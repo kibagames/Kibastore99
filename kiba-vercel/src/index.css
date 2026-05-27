@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+/* Custom scrollbar and glow effects */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #020617;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e1b4b;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #312e81;
+}
+
+.text-glow-blue {
+  text-shadow: 0 0 10px rgba(56, 189, 248, 0.5), 0 0 20px rgba(56, 189, 248, 0.3);
+}
+
+.text-glow-pink {
+  text-shadow: 0 0 10px rgba(244, 63, 94, 0.5), 0 0 20px rgba(244, 63, 94, 0.3);
+}
+
+.border-glow-blue {
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.15);
+}
+
+.border-glow-pink {
+  box-shadow: 0 0 15px rgba(244, 63, 94, 0.15);
+}
+
+/* Subtle anime grid pattern */
+.bg-grid-pattern {
+  background-size: 40px 40px;
+  background-image: linear-gradient(to right, rgba(244, 63, 94, 0.03) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(244, 63, 94, 0.03) 1px, transparent 1px);
+}
+
+/* Extra-smooth transition animations for Theme Switching */
+div, header, button, span, h1, h2, h3, h4, p, input, label, section, a, svg {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, box-shadow;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 500ms;
+}
+
+/* ── Crystal-ripple View Transition ──────────────────────────── */
+::view-transition-old(root) {
+  animation: none;
+  mix-blend-mode: normal;
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  animation: crystal-reveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  mix-blend-mode: normal;
+  z-index: 2;
+}
+
+@keyframes crystal-reveal {
+  from {
+    clip-path: circle(0% at var(--ripple-x, 50%) var(--ripple-y, 10%));
+    filter: brightness(1.6) saturate(1.8);
+  }
+  40% {
+    filter: brightness(1.25) saturate(1.4);
+  }
+  to {
+    clip-path: circle(160% at var(--ripple-x, 50%) var(--ripple-y, 10%));
+    filter: brightness(1) saturate(1);
+  }
+}
+
+/* Crystal shimmer burst overlay */
+@keyframes shimmer-burst {
+  0%   { opacity: 0;   transform: scale(0.1); }
+  25%  { opacity: 0.85; }
+  70%  { opacity: 0.3; }
+  100% { opacity: 0;   transform: scale(1); }
+}
+
+@keyframes shimmer-spin {
+  from { transform: scale(0.1) rotate(0deg); }
+  to   { transform: scale(1)   rotate(200deg); }
+}
+
+.crystal-burst {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  width: 160px;
+  height: 160px;
+  margin-left: -80px;
+  margin-top: -80px;
+  background: conic-gradient(
+    from 0deg,
+    rgba(255,255,255,0.95) 0%,
+    rgba(150,220,255,0.8)  15%,
+    rgba(210,150,255,0.8)  30%,
+    rgba(150,255,210,0.8)  45%,
+    rgba(255,230,150,0.8)  60%,
+    rgba(255,160,180,0.8)  75%,
+    rgba(180,220,255,0.8)  90%,
+    rgba(255,255,255,0.95) 100%
+  );
+  filter: blur(3px) brightness(1.2);
+  animation: shimmer-burst 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+             shimmer-spin  0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.crystal-ring {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  width: 240px;
+  height: 240px;
+  margin-left: -120px;
+  margin-top: -120px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  box-shadow:
+    0 0 20px rgba(147, 210, 255, 0.6),
+    0 0 40px rgba(200, 150, 255, 0.4),
+    inset 0 0 20px rgba(255, 255, 255, 0.1);
+  animation: shimmer-burst 0.9s 0.05s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
